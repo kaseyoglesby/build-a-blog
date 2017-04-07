@@ -20,7 +20,7 @@ template_directory = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_directory))
 
 # Used Handler class from https://classroom.udacity.com/courses/cs253/lessons/676928821/concepts/6865988250923#
-# Hander class defines template rendering in order to make it easier within other Handlers/Methods
+# Hander class defines template rendering in order to make it cleaner within other Handlers/Methods
 # Instructor granted permission to use freely
 
 class Handler(webapp2.RequestHandler):
@@ -33,17 +33,24 @@ class Handler(webapp2.RequestHandler):
 
 	def render(self, template, **kw):
 		self.write(self.render_str(template, **kw))
+#
+# End of imported Handler class
+#
 
 class EntryPoint(Handler):
 	def get(self):
 		self.render("front.html")
 
-
 class MainHandler(Handler):
     def get(self):
     	self.render("base.html")
 
+class NewPost(Handler):
+	def get(self):
+		self.render("newpost.html")
+
 app = webapp2.WSGIApplication([
     ('/blog', MainHandler),
-    ('/', EntryPoint)
+    ('/', EntryPoint),
+    ('/newpost', NewPost)
 ], debug=True)

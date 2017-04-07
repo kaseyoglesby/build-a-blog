@@ -2,18 +2,17 @@
 <html>
     <head>
         <title>Blog</title>
-        <style type="text/css">
-            .error {
-                color: red;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" />
     </head>
     <body>
         <h1>
-            <a href="/">Blog</a>
+            <a href="/">LC101 Blog</a>
         </h1>
+        <form action="/newpost" method="get">
+            <input type="submit" value="New Post" class="button"/>
+        </form>
+        <br>
         <hr>
-
 
         {% block content %}
         {% endblock %}

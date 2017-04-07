@@ -1,0 +1,43 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 50px 100px;
+}
+
+h1 {
+
+}
+
+.error {
+    color: red;
+}
+
+div {
+	margin: 50px 50px;
+}
+
+#post-title {
+	width: 450px;
+	margin-bottom: 15px;
+}
+
+#post-body {
+	width: 450px;
+	height: 500px;
+	margin-bottom: 15px;
+}
+
+hr {
+	height: 4px;
+	color:  black;
+	background-color: black;
+	border-color: black;
+}
+
+.button {
+
+	display: inline;
+	font-size: 18px;
+	width: 170px;
+}
