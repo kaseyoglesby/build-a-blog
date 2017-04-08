@@ -14,12 +14,12 @@ body {
 	margin: 0px 50px;
 }
 
-#post-title {
+#input-title {
 	width: 450px;
 	margin-bottom: 15px;
 }
 
-#post-body {
+#input-body {
 	width: 450px;
 	height: 200px;
 	margin-bottom: 15px;
@@ -37,4 +37,19 @@ hr {
 	display:  block;
 	font-size: 18px;
 	width: 170px;
+}
+
+.post-title {
+	font-size: 24px;
+	font-variant: small-caps;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+.post-body {
+	font-family: 'Open Sans', sans-serif;
+	color: darkgrey;
+	margin-left: 40px;
+	margin-bottom: 40px;
+
 }

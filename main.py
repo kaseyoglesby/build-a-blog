@@ -51,8 +51,19 @@ class EntryPoint(Handler):
 class MainHandler(Handler):
     def get(self):
     	posts = db.GqlQuery("SELECT * FROM BlogPost "
-    						"ORDER BY created DESC ")
-    	self.render('base.html', posts=posts)
+    						"ORDER BY created DESC "
+    						"LIMIT 5 ")
+    	self.render('blog.html', posts=posts)
+
+class ViewPostHandler(Handler):
+    def get(self, id):
+#    	self.write(id)
+		post = BlogPost.get_by_id(int(id))
+		
+		if post:
+			self.render('singleblogpost.html', post=post)
+		else:
+			self.redirect("/blog")
 
 class NewPost(Handler):
 	def get(self):
@@ -74,5 +85,6 @@ class NewPost(Handler):
 app = webapp2.WSGIApplication([
     ('/blog', MainHandler),
     ('/', EntryPoint),
-    ('/newpost', NewPost)
+    ('/newpost', NewPost),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)
 ], debug=True)
