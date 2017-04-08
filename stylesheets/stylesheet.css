@@ -5,16 +5,13 @@ body {
     margin: 50px 100px;
 }
 
-h1 {
-
-}
-
 .error {
     color: red;
+    height: 20px;
 }
 
-div {
-	margin: 50px 50px;
+#newpost {
+	margin: 0px 50px;
 }
 
 #post-title {
@@ -24,7 +21,7 @@ div {
 
 #post-body {
 	width: 450px;
-	height: 500px;
+	height: 200px;
 	margin-bottom: 15px;
 }
 
@@ -33,11 +30,11 @@ hr {
 	color:  black;
 	background-color: black;
 	border-color: black;
+	margin: 50px 0px;
 }
 
 .button {
-
-	display: inline;
+	display:  block;
 	font-size: 18px;
 	width: 170px;
 }

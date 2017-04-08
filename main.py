@@ -15,9 +15,11 @@
 # limitations under the License.
 #
 import webapp2, os, jinja2, cgi
+from google.appengine.ext import db
 
 template_directory = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_directory))
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_directory),
+							   autoescape = True)
 
 # Used Handler class from https://classroom.udacity.com/courses/cs253/lessons/676928821/concepts/6865988250923#
 # Hander class defines template rendering in order to make it cleaner within other Handlers/Methods
@@ -37,17 +39,37 @@ class Handler(webapp2.RequestHandler):
 # End of imported Handler class
 #
 
+class BlogPost(db.Model):
+	title = db.StringProperty(required = True)
+	body = db.TextProperty(required = True)
+	created = db.DateTimeProperty(auto_now_add = True)
+
 class EntryPoint(Handler):
 	def get(self):
-		self.render("front.html")
+		self.render('front.html')
 
 class MainHandler(Handler):
     def get(self):
-    	self.render("base.html")
+    	posts = db.GqlQuery("SELECT * FROM BlogPost "
+    						"ORDER BY created DESC ")
+    	self.render('base.html', posts=posts)
 
 class NewPost(Handler):
 	def get(self):
-		self.render("newpost.html")
+		self.render('newpost.html')
+
+	def post(self):
+		post_title = self.request.get('post-title')
+		post_body = self.request.get('post-body')
+
+		if post_title and post_body:
+			post = BlogPost(title=post_title, body=post_body)
+			post.put()
+			self.redirect("/blog")
+		else:
+			error_message = 'Please enter both a title and some text for your blog post.'
+			self.render('/newpost.html', title=post_title, body=post_body, error=error_message)
+
 
 app = webapp2.WSGIApplication([
     ('/blog', MainHandler),

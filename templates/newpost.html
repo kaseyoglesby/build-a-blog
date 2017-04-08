@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-	<form>
-		<label>Title</label><br>
-		<input type="text" name="post-title" id="post-title" /><br>
-		<label>Say anything you want!</label><br>
-		<input type="text" name="post-body" id="post-body" /><br>
+<div id="newpost">
+	<form action="/newpost" method="post">
+		<label>
+			<div>Title</div>
+			<input type="text" required="true" name="post-title" id="input-title" value="{{ title }}" />
+		</label>
+		<label>
+			<div>Say anything you want!</div>
+			<textarea required="true" name="post-body" id="input-body">{{ body }}</textarea>
+		</label>
+		<div class="error">{{ error }}</div>
 		<input type="submit" class="button" />
 	</form>
 </div>
