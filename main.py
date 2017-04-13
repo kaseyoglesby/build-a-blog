@@ -46,7 +46,7 @@ class BlogPost(db.Model):
 
 class EntryPoint(Handler):
 	def get(self):
-		self.render('front.html')
+		self.redirect('/blog')
 
 class MainHandler(Handler):
     def get(self):
@@ -63,7 +63,7 @@ class ViewPostHandler(Handler):
 		if post:
 			self.render('singleblogpost.html', post=post)
 		else:
-			self.redirect("/blog")
+			self.redirect('/blog')
 
 class NewPost(Handler):
 	def get(self):
